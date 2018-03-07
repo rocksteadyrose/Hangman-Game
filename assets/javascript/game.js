@@ -5,67 +5,76 @@
 //Check if guess is right
 //If right, push to right array
 //If wrong, push to wrong array
+//Award points/remove points from guesses
 
 
-var musicals = ["dontcryformeargentina", "tomorrow", "idreamedadream", "memory", "the phantomoftheopera"];
+var musicals = ["dontcryformeargentina", "tomorrow", "idreamedadream", "memory", "thephantomoftheopera"];
 var wins = 0;
+var points = 0;
 var wrongLetter = [];
 var guessesLeft = 15;
 var underScores = [];
-var userGuesses = 0;
+var userGuesses = [];
+var lettersGuessed = [];
 var randomWord;
 
 
 function startGame() {
-    // PICK RANDOM WORD FROM ARRAY. This rounds a number DOWNWARDS to the nearest integer, and returns the result from within that array.
     randomWord = musicals[Math.floor(Math.random() * musicals.length)];
-    console.log("random word = " + randomWord);
+    // PICK RANDOM WORD FROM THE MUSICALS ARRAY. 
+    //This rounds a number DOWNWARDS to the nearest integer, and returns the result from within that array. What's in the bracket is only a number.
 
-    // 'EMPTY LETTER ANSWERS ARRAY': An array with empty letters to match the number of empty letters in the word. The for loop creates a looping variable that goes up to (but doesn't include) words.length. Each time around the loop, we add a new element to the ANSWERS array that will be the same length as randomWord. When the loop finishes, the ANSWERS array will be the same length as randomWord but will just be blanks.
-    for (var i = 0; i < randomWord.length; i++) 
-    {
+    for (var i = 0; i < randomWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word
         underScores.push('_'); //pushes the random word to the page as underscores
-        }
+    } 
 
-    //Printing underscores to the screen. PS: .join(" ") will get rid of the commas.
+    // THE ABOVE IS AN 'EMPTY LETTER ANSWERS ARRAY': An array with empty letters to match the number of empty letters in the word. The 'for loop' creates a looping variable that goes up to (but doesn't include) musicals.length. Each time around the loop, we add a new element to the ANSWERS array that will be the same length as randomWord. When the loop finishes, the ANSWERS array will be the same length as randomWord but will just be blanks.
+    
     document.getElementById('replacingunderscores').textContent = underScores.join(" ");
+    //Printing underscores to the screen. PS: .join(" ") will get rid of the commas.
 
-    //Reset
-    wrongLetter = [];
-    guessesLeft = 15;
-
-    //HTML
     document.getElementById("guessesleft").textContent = guessesLeft;
+    //HTML
+    lettersGuessed = [];
+    //Reset
+}
 
-    }
-
-    // User Guesses: This function is run whenever the user presses a key.
 document.onkeyup = function(event) {
-    // Determines which key was pressed.
-        userGuesses = event.key;
+     // This function is run whenever the user presses a key for their user guess.
 
-    //Getting the index of RandomWord and seeing if any of the userGuesses exist within RandomWord. If it does, we'll get a value greater than -1. If the letter that the user presses actually exists within the word, you'll get a value greater than -1. If it doesn't, you'll get -1.
-        if (randomWord.indexOf(userGuesses) > -1) 
-        {
-           for(var i = 0; i < randomWord.length; i++)
-           { 
-               //If the letter is equal to the userGuesses, then go down to UnderScores at index 0 and replace that with UserGuesses.
-               if (randomWord[i] === userGuesses)
-                {
-                    underScores[i] = userGuesses;
-                }
-            }
+    userGuesses = event.key;
+    // Determines which key was pressed.
+
+    //THE BELOW CHECKS TO SEE IF THE GUESSED LETTER EXISTS WITHIN THE RANDOM WORD ARRAY: Search randomWord for the userGuesses (looking for the index)/seeing if any of the userGuesses exist within the RandomWord array. If it does, we'll get a value greater than -1. If the letter that the user presses actually exists within the word, you'll get a value greater than -1. If it doesn't, you'll get -1.
+
+    if (randomWord.indexOf(userGuesses) > -1) {
+
+        for(var i = 0; i < randomWord.length; i++) {
+
+            if (randomWord[i] === userGuesses) {
+            //If the letter is equal to the userGuesses, then go down to UnderScores at index 0 and replace that with UserGuesses.
+
+            underScores[i] = userGuesses;
+
+            } 
         }
-                
-        else {
-            //Push the user guesses into the wrongLetter array
-            wrongLetter.push(userGuesses);
-            guessesLeft--;
-            console.log(guessesLeft);
-        }
+
+        points++;
+
+    }
+            
+    else {
+
+        wrongLetter.push(userGuesses);
+        guessesLeft--;
+        //Push the user guesses into the wrongLetter array
     }
 
-    startGame();
+    document.getElementById("lettersguessed").textContent = lettersGuessed;
+}
+
+
+startGame();
 
 
 
@@ -92,8 +101,8 @@ document.onkeyup = function(event) {
 
         // This is a variable of the remaining letters, and it's the same length as the word the user is trying to guess. Each time they guess correctly, this value/length is reduced by one to coincide with the letter in the word.
         //var remainingLetters = words.length;
-   // }
-   // }
+   // 
+   //
 
     //var musical = [["i," "d," "r," "e," "a," "m," "e," "d," "a," "d," "r," "e," "a," "m,"], 
 //["t", "o", "m", "o" "r", "r", "o", "w",],
