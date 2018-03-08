@@ -10,8 +10,7 @@
 
 var musicals = ["dontcryformeargentina", "tomorrow", "idreamedadream", "memory", "thephantomoftheopera"];
 var wins = 0;
-var points = 0;
-var wrongLetter = [];
+//var points = 0;
 var guessesLeft = 15;
 var underScores = [];
 var userGuesses = [];
@@ -30,13 +29,8 @@ function startGame() {
 
     // THE ABOVE IS AN 'EMPTY LETTER ANSWERS ARRAY': An array with empty letters to match the number of empty letters in the word. The 'for loop' creates a looping variable that goes up to (but doesn't include) musicals.length. Each time around the loop, we add a new element to the ANSWERS array that will be the same length as randomWord. When the loop finishes, the ANSWERS array will be the same length as randomWord but will just be blanks.
     
-    document.getElementById('replacingunderscores').textContent = underScores.join(" ");
+    document.getElementById("replacingunderscores").textContent = underScores.join(" ");
     //Printing underscores to the screen. PS: .join(" ") will get rid of the commas.
-
-    document.getElementById("guessesleft").textContent = guessesLeft;
-    //HTML
-    lettersGuessed = [];
-    //Reset
 }
 
 document.onkeyup = function(event) {
@@ -49,61 +43,30 @@ document.onkeyup = function(event) {
 
     if (randomWord.indexOf(userGuesses) > -1) {
 
-        for(var i = 0; i < randomWord.length; i++) {
+        for (var i = 0; i < randomWord.length; i++) {
 
             if (randomWord[i] === userGuesses) {
-            //If the letter is equal to the userGuesses, then go down to UnderScores at index 0 and replace that with UserGuesses.
+            //If that first letter in the random word is equal to the userGuesses, then go down to UnderScores at index 0 and replace that with UserGuesses.
 
-            underScores[i] = userGuesses;
-
+                underScores[i] = userGuesses;
+                document.getElementById("replacingunderscores").textContent = userGuesses;
+                wins++;
+                document.getElementById("wins").textContent = wins;
             } 
         }
-
-        points++;
-
     }
             
     else {
 
-        wrongLetter.push(userGuesses);
+        lettersGuessed.push(userGuesses);
         guessesLeft--;
-        //Push the user guesses into the wrongLetter array
+        //Push the user guesses that are incorrect into the lettersGuessed array and deduct from the guessesLeft
+        document.getElementById("guessesleft").textContent = guessesLeft;
+        //Prints the number of guesses remaining
+        document.getElementById("lettersguessed").textContent = lettersGuessed;
+        //Prints the letters to the screen that the user has guessed incorrectly
     }
-
-    document.getElementById("lettersguessed").textContent = lettersGuessed;
 }
-
 
 startGame();
 
-
-
-
-
-
-                               
-            // Creating a variable to hold our new HTML. Our HTML now keeps track of the user and computer guesses, and wins/losses/ties.             
-            // Select the div with the id "demo", and insert the following HTML into it.
-            //document.getElementById("demo").innerHTML = userGuess;
-
-            
-
-
-            //while (remainingLetters > 0) {
-
-            //Update the ANSWER ARRAY according to the guess, so we add this code to the else statement:
-           // for (var j = 0; j < words.length; j++) {
-                //if (words[j] === userGuess) {
-                    //answerArray[j] = guess;
-                    //remainingLetters--;
-                //}
-            //}
-
-        // This is a variable of the remaining letters, and it's the same length as the word the user is trying to guess. Each time they guess correctly, this value/length is reduced by one to coincide with the letter in the word.
-        //var remainingLetters = words.length;
-   // 
-   //
-
-    //var musical = [["i," "d," "r," "e," "a," "m," "e," "d," "a," "d," "r," "e," "a," "m,"], 
-//["t", "o", "m", "o" "r", "r", "o", "w",],
-//["d", "o", "n", "t", "c", "r", "y", "f", "o", "r", "m", "e", "a", "r", "g", "e", "n", "t", "i", "n", "a"]]
