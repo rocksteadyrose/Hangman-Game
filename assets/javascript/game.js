@@ -41,23 +41,28 @@ function startGame() {
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
     incorrectGuessedLetterArray = [];
-    musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)];
+    guessesCounter = " ";
+    guessesCounterDom.textContent = guessesCounter;
+    guessesCounter = 5;
+
+}
+
+
+function pickRandomWord() {
+musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)];
     // PICK A NEW WORD: PICK A RANDOM WORD FROM THE MUSICALS ARRAY. Generates a random index out of that word bank and gets a new word out.
     //This rounds a number DOWNWARDS to the nearest integer, and returns the result from within that array (what's in the bracket is only a number).
 
         //LOOPS THROUGH NEW PICKED WORD. Create placeholders out of new picked word:
     for (var i = 0; i < musicalPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
     //Check to see what kind of a word you're picking
-        if (musicalPickedWord[i] === '') {
-            musicalPlaceholderArray.push(''); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
+        if (musicalPickedWord[i] === " ") {
+            musicalPlaceholderArray.push(" "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
         } else {
-            musicalPlaceholderArray.push('_') //If it's not an empty space, push an underscore.
+            musicalPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
         }
     }
-    guessesCounter = " ";
-    guessesCounterDom.textContent = guessesCounter;
-    guessesCounter = 5;
-
+    underscores.textContent = musicalPlaceholderArray.join("");
 }
 //------------------------------------------------------------------------------------------------------------------
 // GUESSING SECTION: This is the letter guess function. It will take in a letter you press and see if it's in the selected word or not.
@@ -73,7 +78,7 @@ function startGame() {
                 //Then, if they match, switch the placeholder character with the actual letter.
             }
             messageLetterAlready.textContent = ""; //This is to cancel out the 'you picked this already' message so it no longer displays it (if they then pick another)
-            underscores.textContent = musicalPlaceholderArray.join(''); //This is to join the placeholder with the correct letter
+            underscores.textContent = musicalPlaceholderArray.join(""); //This is to join the placeholder with the correct letter
             (wrongLetter(letter));
             pointsResets(letter);
         }
@@ -105,15 +110,26 @@ function startGame() {
         if (losses === 5) {
             alert("GAME OVER!")
         }
-        if (musicalPickedWord === musicalPlaceholderArray.join('')) {
+        if (musicalPickedWord === musicalPlaceholderArray.join("")) {
             wins++;
             winsDom.textContent = wins;
-            guessingTheLetter(letter);
-        }
+            musicalPickedWord[i+1];
+            musicalPlaceholderArray = [];
+            underscores.textContent = musicalPlaceholderArray.join("");
+            for (var i = 0; i < musicalPickedWord.length; i++) {
+                if (musicalPickedWord[i] === letter.toLowerCase()) {
+                    //Convert to lower case to compare them correctly
+                    musicalPlaceholderArray[i] = musicalPickedWord[i]; }
+                    //Then, if they match, switch the placeholder character with the actual letter.
+                guessingTheLetter(letter);
+            }
+            startGame();
+            pickRandomWord();
         if (wins === 5) {
-            alert("YOU WIN")    
+            alert("YOU WIN")
         }
     }
+}
 
     
 //USER INTERACTION
@@ -129,3 +145,5 @@ document.onkeyup = function(event) {
 //Start game
 startGame();
 //   
+
+pickRandomWord();
