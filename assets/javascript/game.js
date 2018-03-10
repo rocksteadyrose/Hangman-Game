@@ -48,10 +48,10 @@ function startGame() {
         //LOOPS THROUGH NEW PICKED WORD. Create placeholders out of new picked word:
     for (var i = 0; i < musicalPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
     //Check to see what kind of a word you're picking
-        if (musicalPickedWord[i] === " ") {
-            musicalPlaceholderArray.push("   "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
+        if (musicalPickedWord[i] === '') {
+            musicalPlaceholderArray.push(''); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
         } else {
-            musicalPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
+            musicalPlaceholderArray.push('_') //If it's not an empty space, push an underscore.
         }
     }
     guessesCounter = " ";
@@ -75,7 +75,7 @@ function startGame() {
             messageLetterAlready.textContent = ""; //This is to cancel out the 'you picked this already' message so it no longer displays it (if they then pick another)
             underscores.textContent = musicalPlaceholderArray.join(''); //This is to join the placeholder with the correct letter
             (wrongLetter(letter));
-            pointsResets();
+            pointsResets(letter);
         }
         else if (gameOn === false) {
             messageGameRunning.textContent = "Click the new game button to start the game!"; }
@@ -97,7 +97,7 @@ function startGame() {
 
 //RESET ETC
 
-    function pointsResets() {
+    function pointsResets(letter) {
         if (guessesCounter === 0) {
             losses++;
             lossesDom.textContent = losses;
@@ -107,11 +107,12 @@ function startGame() {
         }
         if (musicalPickedWord === musicalPlaceholderArray.join('')) {
             wins++;
+            winsDom.textContent = wins;
+            guessingTheLetter(letter);
         }
         if (wins === 5) {
-            alert("YOU WIN")
+            alert("YOU WIN")    
         }
-        winsDom.textContent = wins;
     }
 
     
