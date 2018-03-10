@@ -11,34 +11,34 @@
 
 
 //------------------------------------------------------------------------------------------------------------------
-//GLOBAL VARIABLES
-var musicals = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
-var wins = 0; //Win counter
-var losses = 0; //Losses counter
-var guessesCounter; //Amount of guesses left
-var gameOn = false; //Has the game started - set to false until "function StartGame"
-var randomPickedWord = ""; //Created from the random musicals variable array
-var randomPickedWordPlaceholder = " "; //Array automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
-var randomPickedWordPlaceholderArray = []; //Automatically creates spaces
-var guessedLetterArray = []; //Correct guessed letter bank
-var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
-
 //GLOBAL VARIABLES FOR HTML
 var newGame = document.getElementById("newgamebuttonID");
 var underscores = document.getElementById("replacingunderscoresID");
-var lettersGuessed = document.getElementById("lettersguessedID");
-var wins = document.getElementById("winsID");
-var losses = document.getElementById("lossesID");
+var lettersGuessedDom = document.getElementById("lettersguessedID");
+var winsDom = document.getElementById("winsID");
+var lossesDom = document.getElementById("lossesID");
+var guessesCounterDom = document.getElementById("guessesleftID");
+guessesCounterDom.textContent = guessesCounter;
 var messageGameRunning = document.getElementById("gamerunningID");
 var messageLetterAlready = document.getElementById("letteralreadyID");
+
+//GLOBAL VARIABLES
+var musicals = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
+var wins = 0; //Win counter
+var guessesCounter = " ";
+var losses = 0; //Losses counter
+var gameOn = false; //Has the game started - set to false until "function StartGame"
+var randomPickedWord = ""; //Created from the random musicals variable array
+var finalStepWordPlaceholder = " "; //Array automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
+var finalStepWordPlaceholderArray = []; //Automatically creates spaces
+var guessedLetterArray = []; //Correct guessed letter bank
+var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
 
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
 function startGame() {
     gameOn = true;
-    guessesCounter = 15;
-    var guessesCounter = document.getElementById("guessesleftID").textContent = guessesCounter;    
-    randomPickedWordPlaceholderArray = [];
+    finalStepWordPlaceholderArray = [];
     guessedLetterArray = [];
     incorrectGuessedLetterArray = [];
     randomPickedWord = musicals[Math.floor(Math.random() * musicals.length)];
@@ -49,61 +49,73 @@ function startGame() {
     for (var i = 0; i < randomPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
     //Check to see what kind of a word you're picking
         if (randomPickedWord[i] === " ") {
-            randomPickedWordPlaceholderArray.push(" "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
+            finalStepWordPlaceholderArray.push("  "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
         } else {
-            randomPickedWordPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
+            finalStepWordPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
         }
     }
+    guessesCounter = " ";
+    guessesCounterDom.textContent = guessesCounter;
+    guessesCounter = 15;
+
 }
 //------------------------------------------------------------------------------------------------------------------
-
 // GUESSING SECTION: This is the letter guess function. It will take in a letter you press and see if it's in the selected word or not.
     function guessingTheLetter(letter) {
         if (gameOn === true && guessedLetterArray.indexOf(letter) === -1) {
-        //If the game is running and we haven't guessed the letter yet, then we'll run our game in here and push letter into the correct guessed letter bank.
+        //If the game is running and we haven't guessed the letter yet (the letter isn't in the 'guessed letter array' yet, meaning we haven't guessed yet), then we'll run our game in here and push letter into the correct guessed letter bank.
         guessedLetterArray.push(letter);
         //Check if guessed letter is in the picked word: Loop over picked word and run an if statement. If at any point the letter we guessed is equal to the picked word letter at i (at any of those characters), we're going to select our picked placeholder at i and swap it out for the true letter. 
         for (var i = 0; i < randomPickedWord.length; i++) {
             if (randomPickedWord[i] === letter.toLowerCase()) {
                 //Convert to lower case to compare them correctly
-                randomPickedWordPlaceholderArray[i] = randomPickedWord[i]; }
+                finalStepWordPlaceholderArray[i] = randomPickedWord[i]; }
                 //Then, if they match, switch the placeholder character with the actual letter.
             }
             messageLetterAlready.textContent = ""; //This is to cancel out the 'you picked this already' message so it no longer displays it (if they then pick another)
-            underscores.textContent = randomPickedWordPlaceholderArray.join(); //This is to join the placeholder with the correct letter
-            wrongLetter(letter);
+            underscores.textContent = finalStepWordPlaceholderArray.join(); //This is to join the placeholder with the correct letter
+            (wrongLetter(letter));
         }
-        else {
-            if (gameOn === false) {
+        else if (gameOn === false) {
             messageGameRunning.textContent = "Click the new game button to start the game!"; }
             else {
-            messageLetterAlready.textContent = "You picked this already! Pick another!";
-                }
-    }
+            messageLetterAlready.textContent = "You picked this already! Pick another!"; }
     }
 //------------------------------------------------------------------------------------------------------------------
 
     function wrongLetter(letter) {
-        if (randomPickedWordPlaceholderArray.indexOf(letter.toLowerCase()) === -1) {
+        if (finalStepWordPlaceholderArray.indexOf(letter.toLowerCase()) === -1) {
             guessesCounter--;//Deduct a guess
+            guessesCounterDom.textContent = guessesCounter;
             incorrectGuessedLetterArray.push(letter);//Push the incorrect letter to this letter bank
-            lettersGuessed.textContent = incorrectGuessedLetterArray;
-            guessesCounter.textContent = guessesCounter;
+            lettersGuessedDom.textContent = incorrectGuessedLetterArray;
+        }
     }
-}
 
 //------------------------------------------------------------------------------------------------------------------
 
 //RESET ETC
 
-    function points(letter) {
+    function pointsResets() {
         if (guessesCounter === 0) {
             losses++;
-            losses.textContent = losses;
+            lossesDom.textContent = losses;
+        }
+
+        if (losses === 5) {
+            alert("GAME OVER!")
+        }
+
+        if (losses === 5) {
+            alert("GAME OVER!")
+        }
+
+        if (wins === 5) {
+            alert("YOU WIN")
         }
     }
 
-
+    
 //USER INTERACTION
 
 document.onkeyup = function(event) {
@@ -111,6 +123,9 @@ document.onkeyup = function(event) {
     guessingTheLetter(event.key);
         // Determines which key was pressed.
     }
-//------------------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------------
+
+
 //Start game
-startGame();   
+startGame();
+//   
