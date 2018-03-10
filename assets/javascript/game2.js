@@ -48,6 +48,11 @@ function makeWordAnArray() {
     }
 }
 
+function checkUserGuess {
+    if (lettersFromWord[j] === userGuess {
+        
+    }
+}
 //----------------------------------------
 
 function gameStartEnd() {

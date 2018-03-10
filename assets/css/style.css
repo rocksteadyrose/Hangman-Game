@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+}
+
+@font-face {
+	font-family: "showtime";
+    src: url("fonts/Showtime.ttf");
+}
+
+@font-face {
+    font-family: "assistantregular";
+    src: url("fonts/Assistant-Regular.ttf");
+    font-weight: normal;
+}
+
+body {
+    font-family: "assistantregular", Arial, Helvetica, sans-serif;
+    max-width: 960px;
+    margin: auto;
+    color: rgb(0, 0, 0);
+    font-size: 22px;
+    background-image: url("../images/curtains.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+header {
+    margin: 30px;
+    color: rgb(255, 217, 0);
+    line-height: 60px;
+    width: 850px;
+}
+
+header h1 {
+    font-family: "showtime";
+    font-size: 40px;
+    text-shadow: 2px 2px #000000;
+    text-align: center;
+}
+
+header h3 {
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px #000000;
+}
+
+#letteralreadyID {
+    color: red;
+}
+
+#content {
+    line-height: 30px;
+    width: 850px;
+    height: 350px;
+    text-align: center;
+    padding-top: 65px;
+    margin: 50px 30px 80px 30px;
+    background: url("../images/marquee.png");
+    background-size: 100% 100%;
+}

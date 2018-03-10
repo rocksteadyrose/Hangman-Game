@@ -8,22 +8,14 @@
 //Add onkeyup event to trigger letter guesses
 
 //------------------------------------------------------------------------------------------------------------------
-//GLOBAL VARIABLES FOR HTML
-var newGame = document.getElementById('newgamebutton');
-var underscores = document.getElementById('replacingunderscores');
-var lettersguessed = document.getElementById("lettersguessed");
-var guessesLeft = document.getElementById("guessesleft");
-var wins = document.getElementById("wins");
-var losses = document.getElementById("lossesID");
-var messageGameRunning = document.getElementById("gamerunning");
-var messageLetterAlready = document.getElementById("letteralready");
+
 
 //------------------------------------------------------------------------------------------------------------------
 //GLOBAL VARIABLES
 var musicals = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
 var wins = 0; //Win counter
-var losses = 0;
-var guessesLeft = 15; //Amount of guesses left
+var losses = 0; //Losses counter
+var guessesCounter; //Amount of guesses left
 var gameOn = false; //Has the game started - set to false until "function StartGame"
 var randomPickedWord = ""; //Created from the random musicals variable array
 var randomPickedWordPlaceholder = " "; //Array automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
@@ -31,17 +23,24 @@ var randomPickedWordPlaceholderArray = []; //Automatically creates spaces
 var guessedLetterArray = []; //Correct guessed letter bank
 var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
 
+//GLOBAL VARIABLES FOR HTML
+var newGame = document.getElementById("newgamebuttonID");
+var underscores = document.getElementById("replacingunderscoresID");
+var lettersGuessed = document.getElementById("lettersguessedID");
+var wins = document.getElementById("winsID");
+var losses = document.getElementById("lossesID");
+var messageGameRunning = document.getElementById("gamerunningID");
+var messageLetterAlready = document.getElementById("letteralreadyID");
+
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
 function startGame() {
     gameOn = true;
-    guessesLeft = 15;
-    wins = 0;
+    guessesCounter = 15;
+    var guessesCounter = document.getElementById("guessesleftID").textContent = guessesCounter;    
+    randomPickedWordPlaceholderArray = [];
     guessedLetterArray = [];
     incorrectGuessedLetterArray = [];
-    randomPickedWordPlaceholderArray = [];
-    guessesLeft.textContent = guessesLeft;
-    losses = 0;
     randomPickedWord = musicals[Math.floor(Math.random() * musicals.length)];
     // PICK A NEW WORD: PICK A RANDOM WORD FROM THE MUSICALS ARRAY. Generates a random index out of that word bank and gets a new word out.
     //This rounds a number DOWNWARDS to the nearest integer, and returns the result from within that array (what's in the bracket is only a number).
@@ -86,10 +85,10 @@ function startGame() {
 
     function wrongLetter(letter) {
         if (randomPickedWordPlaceholderArray.indexOf(letter.toLowerCase()) === -1) {
-            guessesLeft--;//Deduct a guess
-            guessesleft.textContent = guessesLeft; //Show guesses left on html
+            guessesCounter--;//Deduct a guess
             incorrectGuessedLetterArray.push(letter);//Push the incorrect letter to this letter bank
-            lettersguessed.textContent = incorrectGuessedLetterArray;
+            lettersGuessed.textContent = incorrectGuessedLetterArray;
+            guessesCounter.textContent = guessesCounter;
     }
 }
 
@@ -98,9 +97,9 @@ function startGame() {
 //RESET ETC
 
     function points(letter) {
-        if (guessesLeft === 0) {
+        if (guessesCounter === 0) {
             losses++;
-            losses.textContent = losses; //Show guesses left on html
+            losses.textContent = losses;
         }
     }
 
