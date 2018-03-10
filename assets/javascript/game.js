@@ -24,6 +24,8 @@ var messageLetterAlready = document.getElementById("letteralreadyID");
 
 //GLOBAL VARIABLES
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
+var alphabetString = "abcdefghijklmnopqrstuvwxyz";
+var alphabetLetters = [];
 var wins = 0; //Win counter
 var guessesCounter = " ";
 var losses = 0; //Losses counter
@@ -41,9 +43,11 @@ function startGame() {
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
     incorrectGuessedLetterArray = [];
-    guessesCounter = " ";
+    guessesCounter = "";
     guessesCounterDom.textContent = guessesCounter;
     guessesCounter = 5;
+    messageLetterAlready.textContent = "";
+    alphabetLetters = alphabetString.split();
 
 }
 
@@ -68,8 +72,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 // GUESSING SECTION: This is the letter guess function. It will take in a letter you press and see if it's in the selected word or not.
     function guessingTheLetter(letter) {
         if (gameOn === true && correctGuessedLetterArray.indexOf(letter) === -1) {
-        //If the game is running and we haven't guessed the letter yet (the letter isn't in the 'guessed letter array' yet, meaning we haven't guessed yet), then we'll run our game in here and push letter into the correct guessed letter bank.
-        correctGuessedLetterArray.push(letter);
+        //If the game is running and we haven't guessed the letter yet (the letter isn't in the 'guessed letter array' yet, meaning we haven't guessed yet), then we'll run our game in here.
         //Check if guessed letter is in the picked word: Loop over picked word and run an if statement. If at any point the letter we guessed is equal to the picked word letter at i (at any of those characters), we're going to select our picked placeholder at i and swap it out for the true letter. 
         for (var i = 0; i < musicalPickedWord.length; i++) {
             if (musicalPickedWord[i] === letter.toLowerCase()) {
@@ -77,10 +80,11 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                 musicalPlaceholderArray[i] = musicalPickedWord[i]; }
                 //Then, if they match, switch the placeholder character with the actual letter.
             }
+            correctGuessedLetterArray.push(letter); //Push letter into the correct guessed letter bank.
             messageLetterAlready.textContent = ""; //This is to cancel out the 'you picked this already' message so it no longer displays it (if they then pick another)
             underscores.textContent = musicalPlaceholderArray.join(""); //This is to join the placeholder with the correct letter
-            (wrongLetter(letter));
-            pointsResets(letter);
+            wrongLetter(letter);//Check for wrong letters
+            pointsResets(letter);//Then award points/reset
         }
         else if (gameOn === false) {
             messageGameRunning.textContent = "Click the new game button to start the game!"; }
@@ -124,6 +128,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                 guessingTheLetter(letter);
             }
             startGame();
+            lettersGuessedDom.textContent = "";
             pickRandomWord();
         if (wins === 5) {
             alert("YOU WIN")
@@ -137,6 +142,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 document.onkeyup = function(event) {
         // This function is run whenever the user presses a key for their user guess.
     guessingTheLetter(event.key);
+    
         // Determines which key was pressed.
     }
 //-----------------------------------------------------------------------------------------------------------
