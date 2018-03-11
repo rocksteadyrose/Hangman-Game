@@ -26,6 +26,7 @@ var messageLetterAlready = document.getElementById("letteralreadyID");
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
 var alphabetString = "abcdefghijklmnopqrstuvwxyz";
 var alphabetLetters = [];
+var notLetters = [];
 var userTypes;
 var wins = 0; //Win counter
 var guessesCounter = " ";
@@ -45,10 +46,14 @@ function startGame() {
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
     incorrectGuessedLetterArray = [];
-    guessesCounter = "";
     guessesCounterDom.textContent = guessesCounter;
     guessesCounter = 5;
     messageLetterAlready.textContent = "";
+}
+
+function contentReset() {
+    messageLetterAlready.textContent = "";
+    lettersGuessedDom.textContent = "";
 }
 
 
@@ -82,39 +87,39 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
                     correctGuessedLetterArray.push(userTypes);
 
+                    messageLetterAlready.textContent = "";
+
                     underscores.textContent = musicalPlaceholderArray.join("");
 
+                    wrongLetter();
+                    pointsSystem();
                 }
-                wrongLetter();
-                pointsResets();
-
-                if (gameOn === false) {
-                    messageGameRunning.textContent = "Click the new game button to start the game!"; }
 
                 else if (gameOn === false) {
-                    messageLetterAlready.textContent = "You picked this already! Pick another!"; }
+                    messageGameRunning.textContent = "Click the new game button to start the game!"; }
 
-                else {messageLetterAlready.textContent = "";}
-
-        //Then award points/reset
+                else { messageLetterAlready.textContent = "You picked this already! Pick another!";}
     }
 
     function wrongLetter () {
 
-        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) > -1) {              
+        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) {          //if the guess ISN'T in the musical word AND the guess is a letter
             incorrectGuessedLetterArray.push(userTypes);
             lettersGuessedDom.textContent = incorrectGuessedLetterArray;
             guessesCounter--;
-            guessesCounterDom.textContent = guessesCounter; }
+            guessesCounterDom.textContent = guessesCounter;}
 
-        else if (alphabetLetters.indexOf(userTypes) === -1) {
-            incorrectGuessedLetterArray.push(userTypes) === false; }
-        }
+        if (alphabetLetters.indexOf(userTypes) < 0) {
+                //if the guess ISN'T a letter
+            notLetters.push(userTypes);}            
+    }
+
+        
     
 
 //RESET ETC
 
-    function pointsResets() {
+    function pointsSystem() {
         if (guessesCounter === 0) {
             losses++;
             lossesDom.textContent = losses;
@@ -131,12 +136,12 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             for (var i = 0; i < musicalPickedWord.length; i++) {
                 if (musicalPickedWord[i] === userTypes) {
                     musicalPlaceholderArray[i] = musicalPickedWord[i]; }
+                    //lettersGuessedDom.textContent = "";
                     guessingTheLetter();
-            
-            //lettersGuessedDom.textContent = "";
+                    contentReset();
             }
-        startGame();
-        pickRandomWord();
+            startGame();
+            pickRandomWord();
         if (wins === 5) {
             alert("YOU WIN");
         }
@@ -156,13 +161,10 @@ document.onkeyup = function(event) {
         userTypes = event.key.toLowerCase();
         // Determines which key was pressed.
             guessingTheLetter();
-            pointsResets();
     }
 //-----------------------------------------------------------------------------------------------------------
 
 
 //Start game
 startGame();
-//   
-
 pickRandomWord();
