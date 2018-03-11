@@ -26,6 +26,7 @@ var messageLetterAlready = document.getElementById("letteralreadyID");
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
 var alphabetString = "abcdefghijklmnopqrstuvwxyz";
 var alphabetLetters = [];
+var userTypes;
 var wins = 0; //Win counter
 var guessesCounter = " ";
 var losses = 0; //Losses counter
@@ -35,6 +36,7 @@ var musicalPlaceholder = " "; // Spaces to put in below placeholder array
 var musicalPlaceholderArray = []; //Automatically creates spaces
 var correctGuessedLetterArray = []; //Correct guessed letter bank
 var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
+alphabetLetters = alphabetString.split(""); //Splits the letters and puts them into the empty array, alphabetLetters
 
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
@@ -47,8 +49,6 @@ function startGame() {
     guessesCounterDom.textContent = guessesCounter;
     guessesCounter = 5;
     messageLetterAlready.textContent = "";
-    alphabetLetters = alphabetString.split();
-
 }
 
 
@@ -70,43 +70,51 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 }
 //------------------------------------------------------------------------------------------------------------------
 // GUESSING SECTION: This is the letter guess function. It will take in a letter you press and see if it's in the selected word or not.
-    function guessingTheLetter(letter) {
-        if (gameOn === true && correctGuessedLetterArray.indexOf(letter) === -1) {
-        //If the game is running and we haven't guessed the letter yet (the letter isn't in the 'guessed letter array' yet, meaning we haven't guessed yet), then we'll run our game in here.
-        //Check if guessed letter is in the picked word: Loop over picked word and run an if statement. If at any point the letter we guessed is equal to the picked word letter at i (at any of those characters), we're going to select our picked placeholder at i and swap it out for the true letter. 
-        for (var i = 0; i < musicalPickedWord.length; i++) {
-            if (musicalPickedWord[i] === letter.toLowerCase()) {
-                //Convert to lower case to compare them correctly
-                musicalPlaceholderArray[i] = musicalPickedWord[i]; }
-                //Then, if they match, switch the placeholder character with the actual letter.
-            }
-            correctGuessedLetterArray.push(letter); //Push letter into the correct guessed letter bank.
-            messageLetterAlready.textContent = ""; //This is to cancel out the 'you picked this already' message so it no longer displays it (if they then pick another)
-            underscores.textContent = musicalPlaceholderArray.join(""); //This is to join the placeholder with the correct letter
-            wrongLetter(letter);//Check for wrong letters
-            pointsResets(letter);//Then award points/reset
-        }
-        else if (gameOn === false) {
-            messageGameRunning.textContent = "Click the new game button to start the game!"; }
-            else {
-            messageLetterAlready.textContent = "You picked this already! Pick another!"; }
-    }
-//------------------------------------------------------------------------------------------------------------------
+    function guessingTheLetter() {
 
-    function wrongLetter(letter) {
-        if (musicalPlaceholderArray.indexOf(letter.toLowerCase()) === -1) {
-            guessesCounter--;//Deduct a guess
-            guessesCounterDom.textContent = guessesCounter;
-            incorrectGuessedLetterArray.push(letter);//Push the incorrect letter to this letter bank
+                if (gameOn === true && correctGuessedLetterArray.indexOf(userTypes) === -1) {
+                            
+                    for (var i = 0; i < musicalPickedWord.length; i++) {
+
+                        if (musicalPickedWord[i] === userTypes) {
+
+                            musicalPlaceholderArray[i] = musicalPickedWord[i]; } }
+
+                    correctGuessedLetterArray.push(userTypes);
+
+                    underscores.textContent = musicalPlaceholderArray.join("");
+
+                }
+                wrongLetter();
+                pointsResets();
+
+                if (gameOn === false) {
+                    messageGameRunning.textContent = "Click the new game button to start the game!"; }
+
+                else if (gameOn === false) {
+                    messageLetterAlready.textContent = "You picked this already! Pick another!"; }
+
+                else {messageLetterAlready.textContent = "";}
+
+        //Then award points/reset
+    }
+
+    function wrongLetter () {
+
+        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) > -1) {              
+            incorrectGuessedLetterArray.push(userTypes);
             lettersGuessedDom.textContent = incorrectGuessedLetterArray;
-        }
-    }
+            guessesCounter--;
+            guessesCounterDom.textContent = guessesCounter; }
 
-//------------------------------------------------------------------------------------------------------------------
+        else if (alphabetLetters.indexOf(userTypes) === -1) {
+            incorrectGuessedLetterArray.push(userTypes) === false; }
+        }
+    
 
 //RESET ETC
 
-    function pointsResets(letter) {
+    function pointsResets() {
         if (guessesCounter === 0) {
             losses++;
             lossesDom.textContent = losses;
@@ -121,29 +129,34 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             musicalPlaceholderArray = [];
             underscores.textContent = musicalPlaceholderArray.join("");
             for (var i = 0; i < musicalPickedWord.length; i++) {
-                if (musicalPickedWord[i] === letter.toLowerCase()) {
-                    //Convert to lower case to compare them correctly
+                if (musicalPickedWord[i] === userTypes) {
                     musicalPlaceholderArray[i] = musicalPickedWord[i]; }
-                    //Then, if they match, switch the placeholder character with the actual letter.
-                guessingTheLetter(letter);
+                    guessingTheLetter();
+            
+            //lettersGuessedDom.textContent = "";
             }
-            startGame();
-            lettersGuessedDom.textContent = "";
-            pickRandomWord();
+        startGame();
+        pickRandomWord();
         if (wins === 5) {
-            alert("YOU WIN")
+            alert("YOU WIN");
+        }
         }
     }
-}
+
+        
+    
+
+        
 
     
 //USER INTERACTION
 
 document.onkeyup = function(event) {
         // This function is run whenever the user presses a key for their user guess.
-    guessingTheLetter(event.key);
-    
+        userTypes = event.key.toLowerCase();
         // Determines which key was pressed.
+            guessingTheLetter();
+            pointsResets();
     }
 //-----------------------------------------------------------------------------------------------------------
 
