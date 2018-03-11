@@ -30,7 +30,6 @@ var notLetters = [];
 var userTypes;
 var wins = 0; //Win counter
 var guessesCounter = " ";
-var losses = 0; //Losses counter
 var gameOn = false; //Has the game started - set to false until "function StartGame"
 var musicalPickedWord = ""; //Created from the random musicals variable array
 var musicalPlaceholder = " "; // Spaces to put in below placeholder array
@@ -46,14 +45,15 @@ function startGame() {
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
     incorrectGuessedLetterArray = [];
+    guessesCounter = 10;
     guessesCounterDom.textContent = guessesCounter;
-    guessesCounter = 5;
     messageLetterAlready.textContent = "";
 }
 
 function contentReset() {
     messageLetterAlready.textContent = "";
     lettersGuessedDom.textContent = "";
+    guessesCounter = 10;
 }
 
 
@@ -114,19 +114,13 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             notLetters.push(userTypes);}            
     }
 
-        
-    
-
 //RESET ETC
 
     function pointsSystem() {
-        if (guessesCounter === 0) {
-            losses++;
-            lossesDom.textContent = losses;
-        }
-        if (losses === 5) {
-            alert("GAME OVER!")
-        }
+        //if (musicalPickedWord != musicalPlaceholderArray.join("")) {
+            //guessesCounter--;
+        //}
+
         if (musicalPickedWord === musicalPlaceholderArray.join("")) {
             wins++;
             winsDom.textContent = wins;

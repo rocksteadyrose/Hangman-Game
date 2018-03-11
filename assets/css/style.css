@@ -13,12 +13,18 @@
     font-weight: normal;
 }
 
+@font-face {
+    font-family: "assistantregular";
+    src: url("fonts/Assistant-Bold.ttf");
+    font-weight: bold;
+}
+
 body {
     font-family: "assistantregular", Arial, Helvetica, sans-serif;
     max-width: 960px;
     margin: auto;
     color: rgb(0, 0, 0);
-    font-size: 22px;
+    font-size: 30px;
     background-image: url("../images/curtains.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -33,13 +39,15 @@ header {
 
 header h1 {
     font-family: "showtime";
-    font-size: 40px;
+    font-size: 50px;
     text-shadow: 2px 2px #000000;
     text-align: center;
+    line-height: 95px;
 }
 
-header h3 {
-    font-size: 30px;
+section h3 {
+    font-size: 40px;
+    margin-top: -40px;
     text-align: center;
     color: white;
     text-shadow: 2px 2px #000000;
@@ -54,8 +62,25 @@ header h3 {
     width: 850px;
     height: 350px;
     text-align: center;
-    padding-top: 65px;
+    padding-top: 58px;
     margin: 50px 30px 80px 30px;
     background: url("../images/marquee.png");
     background-size: 100% 100%;
+}
+
+#lettersalready, #wins, #guessesremaining {
+    font-weight: bold;
+}
+
+#currentwordID, #replacingunderscoresID, #currentword {
+    line-height: 40px;
+    font-weight: bold;
+}
+
+#replacingunderscoresID, #currentword {
+    letter-spacing: 3px;
+}
+
+#lessimportant {
+    font-size: 20px;
 }
