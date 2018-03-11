@@ -84,3 +84,8 @@ section h3 {
 #lessimportant {
     font-size: 20px;
 }
+
+.musicalPic1 {
+    width: 40px;
+    float: left;
+}

@@ -21,6 +21,8 @@ var guessesCounterDom = document.getElementById("guessesleftID");
 guessesCounterDom.textContent = guessesCounter;
 var messageGameRunning = document.getElementById("gamerunningID");
 var messageLetterAlready = document.getElementById("letteralreadyID");
+var pressAnyKeyDom = document.getElementById("pressanykeyID");
+//var musicalPic1 = document.getElementById("musicalimage1");
 
 //GLOBAL VARIABLES
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
@@ -38,6 +40,21 @@ var correctGuessedLetterArray = []; //Correct guessed letter bank
 var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
 alphabetLetters = alphabetString.split(""); //Splits the letters and puts them into the empty array, alphabetLetters
 
+//-----------------
+//IMAGES
+var musicalPic1;
+var musicalPic2;
+var musicalPic3;
+var musicalPic4;
+var musicalPic5;
+
+
+
+//"<img src=\"assets/images/annie1.jpg\" class=\"musicalPic2\" alt=\"Annie\">";document.querySelector("#musicalPic2").innerHTML = musicalPic2;
+//"<img src=\"assets/images/phantom1.jpg\" class=\"musicalPic3\" alt=\"Phantom\">";document.querySelector("#musicalPic3").innerHTML //= musicalPic3;
+//"<img src=\"assets/images/lesmis1.jpg\" class=\"musicalPic4\" alt=\"LesMis\">";document.querySelector("#musicalPic4").innerHTML = musicalPic4;
+//"<img src=\"assets/images/cats1.jpg\" class=\"musicalPic5\" alt=\"Cats\">";document.querySelector("#musicalPic5").innerHTML = musicalPic4;
+
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
 function startGame() {
@@ -48,6 +65,7 @@ function startGame() {
     guessesCounter = 10;
     guessesCounterDom.textContent = guessesCounter;
     messageLetterAlready.textContent = "";
+    pressAnyKeyDom.textContent = "Press any key to get started!";
 }
 
 function contentReset() {
@@ -77,6 +95,8 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 // GUESSING SECTION: This is the letter guess function. It will take in a letter you press and see if it's in the selected word or not.
     function guessingTheLetter() {
 
+                pressAnyKeyDom.textContent = "";
+
                 if (gameOn === true && correctGuessedLetterArray.indexOf(userTypes) === -1) {
                             
                     for (var i = 0; i < musicalPickedWord.length; i++) {
@@ -90,6 +110,8 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     messageLetterAlready.textContent = "";
 
                     underscores.textContent = musicalPlaceholderArray.join("");
+
+                    if (musicalsList[0] === musicalPlaceholderArray.join("")) {musicalPic1="<img src=\"assets/images/evita1.jpg\" class=\"musicalPic1\" alt=\"Evita\">";document.querySelector("#musicalPic1").innerHTML = musicalPic1;}
 
                     wrongLetter();
                     pointsSystem();
