@@ -23,7 +23,8 @@ var messageGameRunning = document.getElementById("gamerunningID");
 var messageLetterAlready = document.getElementById("letteralreadyID");
 var pressAnyKeyDom = document.getElementById("pressanykeyID");
 var correctAnswerDom = document.getElementById("correctanswerID");
-//var musicalPic1 = document.getElementById("musicalimage1");
+var soLong = document.getElementById("endvideoID");
+var superCali = document.getElementById("startvideoID");
 
 //GLOBAL VARIABLES
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
@@ -41,8 +42,8 @@ var correctGuessedLetterArray = []; //Correct guessed letter bank
 var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
 alphabetLetters = alphabetString.split(""); //Splits the letters and puts them into the empty array, alphabetLetters
 
-//-----------------
-//IMAGES
+//------------------------------------------------------------------------------------------------------------------
+
 var musicalPic1;
 var musicalPic2;
 var musicalPic3;
@@ -53,13 +54,6 @@ var musicalPic2a;
 var musicalPic3a;
 var musicalPic4a;
 var musicalPic5a;
-
-
-
-//"<img src=\"assets/images/annie1.jpg\" class=\"musicalPic2\" alt=\"Annie\">";document.querySelector("#musicalPic2").innerHTML = musicalPic2;
-//"<img src=\"assets/images/phantom1.jpg\" class=\"musicalPic3\" alt=\"Phantom\">";document.querySelector("#musicalPic3").innerHTML //= musicalPic3;
-//"<img src=\"assets/images/lesmis1.jpg\" class=\"musicalPic4\" alt=\"LesMis\">";document.querySelector("#musicalPic4").innerHTML = musicalPic4;
-//"<img src=\"assets/images/cats1.jpg\" class=\"musicalPic5\" alt=\"Cats\">";document.querySelector("#musicalPic5").innerHTML = musicalPic4;
 
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
@@ -74,6 +68,8 @@ function startGame() {
     pressAnyKeyDom.textContent = "Press any key to get started!"; 
 }
 
+//------------------------------------------------------------------------------------------------------------------
+
 function contentReset() {
     gameOn = true;
     messageLetterAlready.textContent = "";
@@ -86,6 +82,7 @@ function contentReset() {
     guessesCounterDom.textContent = guessesCounter;  
 }
 
+//------------------------------------------------------------------------------------------------------------------
 
 function pickRandomWord() {
 musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)];
@@ -163,6 +160,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                 else { messageLetterAlready.textContent = "You picked this already! Pick another!";}
     }
 
+//------------------------------------------------------------------------------------------------------------------
     function wrongLetter () {
 
         if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) { //if the guess ISN'T in the musical word AND the guess is a letter
@@ -187,6 +185,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     guessingTheLetter(); }
                 else {
                     alert("Goodnight and thank you for playing!");
+                    endGame();
                 }
 
             } 
@@ -200,6 +199,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                         guessingTheLetter(); }
                     else {
                         alert("Goodnight and thank you for playing!");
+                        endGame();
                     }
                 
             } 
@@ -207,6 +207,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                 musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
                 document.querySelector("#musicalPic").innerHTML = musicalPic3;
                 musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";
+                document.querySelector("#musicalPic").innerHTML = musicalPic3a;
                 contentReset();
                 i = 0;
                     if (confirm("The correct answer was 'I Dreamed A Dream'! Wanna keep playing?")) {
@@ -214,6 +215,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                         guessingTheLetter(); }
                     else {
                         alert("Goodnight and thank you for playing!");
+                        endGame();
                     }
             }
                 else if (guessesCounter === 0 && musicalsList[3] === musicalPickedWord) {
@@ -226,6 +228,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     guessingTheLetter(); }
                 else {
                     alert("Goodnight and thank you for playing!");
+                    endGame();
                 }
             } 
             else if (guessesCounter === 0 && musicalsList[4] === musicalPickedWord) {
@@ -237,13 +240,13 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     pickRandomWord();
                     guessingTheLetter(); }
                 else {
+                    endGame();
                     alert("Goodnight and thank you for playing!");
                 }
             }
     }
 
-
-//RESET ETC
+//------------------------------------------------------------------------------------------------------------------
 
     function pointsSystem() {
         //if (musicalPickedWord != musicalPlaceholderArray.join("")) {
@@ -264,22 +267,18 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     guessingTheLetter();
                     contentReset();
             }
-            //startGame();
             pickRandomWord();
             
-        if (wins === 8) {
+        if (wins === 3) {
             alert("Start spreading the news! You just won!!!");
+            won();
         }
         }
     }
 
-        
-    
 
-        
+//------------------------------------------------------------------------------------------------------------------
 
-    
-//USER INTERACTION
 
 document.onkeyup = function(event) {
         // This function is run whenever the user presses a key for their user guess.
@@ -289,7 +288,37 @@ document.onkeyup = function(event) {
     }
 //-----------------------------------------------------------------------------------------------------------
 
-
-//Start game
 startGame();
 pickRandomWord();
+
+function won () {
+    superCali ="<iframe src=\"https://www.youtube.com/embed/rihNRTTcztQ?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#startvideoID").innerHTML = superCali;
+    musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = "";
+    musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = "";
+    musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = "";
+    musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = "";
+}
+
+//------------------------------------------------------------------------------------------------------------------
+
+
+function endGame () {
+    soLong ="<iframe src=\"https://www.youtube.com/embed/Qy9_lfjQopU?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#endvideoID").innerHTML = soLong;
+    musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = "";
+    musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = "";
+    musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = "";
+    musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = "";
+    musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = "";
+}
+//------------------------------------------------------------------------------------------------------------------
