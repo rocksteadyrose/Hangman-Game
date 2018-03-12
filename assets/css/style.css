@@ -57,7 +57,7 @@ section h3 {
     color: red;
 }
 
-#content {
+#container {
     line-height: 30px;
     width: 850px;
     height: 350px;
@@ -86,6 +86,31 @@ section h3 {
 }
 
 .musicalPic1 {
-    width: 40px;
+    width: 90px;
+    max-height: 40px;
+    float: left;
+}
+
+.musicalPic2 {
+    width: 90px;
+    max-height: 40px;
+    float: left;
+}
+
+.musicalPic3 {
+    width: 90px;
+    max-height: 40px;
+    float: left;
+}
+
+.musicalPic4 {
+    width: 90px;
+    max-height: 40px;
+    float: left;
+}
+
+.musicalPic5 {
+    width: 90px;
+    max-height: 40px;
     float: left;
 }
