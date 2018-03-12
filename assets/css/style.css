@@ -83,34 +83,75 @@ section h3 {
 
 #lessimportant {
     font-size: 20px;
+    text-align: center;
 }
 
-.musicalPic1 {
-    width: 90px;
-    max-height: 40px;
+.evita1 {
+    width: 150px;
     float: left;
+    padding-left: 50px;
+    padding-bottom: 100px;
 }
 
-.musicalPic2 {
-    width: 90px;
-    max-height: 40px;
-    float: left;
+.evita2 {
+    width: 150px;
+    float: right;
+    padding-bottom: 100px;
+    padding-right: 50px;
 }
 
-.musicalPic3 {
-    width: 90px;
-    max-height: 40px;
+.annie1 {
+    width: 150px;
     float: left;
+    padding-left: 40px;
+    padding-bottom: 70px;
 }
 
-.musicalPic4 {
-    width: 90px;
-    max-height: 40px;
-    float: left;
+.annie2 {
+    width: 140px;
+    float: right;
+    padding-right: 46px;
+    padding-bottom: 75px;
 }
 
-.musicalPic5 {
-    width: 90px;
-    max-height: 40px;
+.lesmis1 {
+    width: 155px;
     float: left;
+    padding-left: 50px;
+    padding-bottom: 170px;
+}
+
+.lesmis2 {
+    width: 160px;
+    float: right;
+    padding-right: 60px;
+    padding-bottom: 40px;
+}
+
+.cats1 {
+    width: 150px;
+    float: left;
+    padding-left: 60px;
+    padding-bottom: 60px;
+}
+
+.cats2 {
+    width: 150px;
+    float: right;
+    padding-right: 60px;
+    padding-bottom: 60px;
+}
+
+.phantom1 {
+    width: 150px;
+    float: left;
+    padding-left: 60px;
+    padding-bottom: 100px;
+}
+
+.phantom2 {
+    width: 150px;
+    float: right;
+    padding-right: 60px;
+    padding-bottom: 100px;
 }

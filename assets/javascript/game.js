@@ -47,6 +47,11 @@ var musicalPic2;
 var musicalPic3;
 var musicalPic4;
 var musicalPic5;
+var musicalPic1a;
+var musicalPic2a;
+var musicalPic3a;
+var musicalPic4a;
+var musicalPic5a;
 
 
 
@@ -111,15 +116,34 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
                     underscores.textContent = musicalPlaceholderArray.join("");
 
-                    if (musicalsList[0] === musicalPlaceholderArray.join("")) {musicalPic1="<img src=\"assets/images/evita1.jpg\" class=\"musicalPic1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = musicalPic1;}
+                    if (musicalsList[0] === musicalPlaceholderArray.join("")) {
+                        musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = musicalPic1;
+                        
+                        musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = musicalPic1a;}
 
-                    if (musicalsList[1] === musicalPlaceholderArray.join("")) {musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"musicalPic2\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = musicalPic2;}
+                    if (musicalsList[1] === musicalPlaceholderArray.join("")) {
+                        musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = musicalPic2;
 
-                    if (musicalsList[2] === musicalPlaceholderArray.join("")) {musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"musicalPic3\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = musicalPic3;}
+                        musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = musicalPic2a;}
 
-                    if (musicalsList[3] === musicalPlaceholderArray.join("")) {musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"musicalPic4\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = musicalPic4;}
+                    if (musicalsList[2] === musicalPlaceholderArray.join("")) {
+                        musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";
+                        
+                        document.querySelector("#musicalPic").innerHTML = musicalPic3;}
 
-                    if (musicalsList[4] === musicalPlaceholderArray.join("")) {musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"musicalPic5\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = musicalPic5;}
+                    if (musicalsList[2] === musicalPlaceholderArray.join("")) {
+                        musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";
+                        document.querySelector("#musicalPicb").innerHTML = musicalPic3a;}
+
+                    if (musicalsList[3] === musicalPlaceholderArray.join("")) {
+                        musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = musicalPic4;
+                        
+                        musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = musicalPic4a;}
+
+                    if (musicalsList[4] === musicalPlaceholderArray.join("")) {
+                        musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = musicalPic5;
+                        
+                        musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = musicalPic5a;}
 
                     wrongLetter();
                     pointsSystem();
