@@ -86,6 +86,12 @@ section h3 {
     text-align: center;
 }
 
+#correctanswerID {
+    font-size: 15px;
+    text-align: center;
+    color: purple;
+}
+
 .evita1 {
     width: 150px;
     float: left;

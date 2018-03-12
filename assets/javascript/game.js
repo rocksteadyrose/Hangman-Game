@@ -22,6 +22,7 @@ guessesCounterDom.textContent = guessesCounter;
 var messageGameRunning = document.getElementById("gamerunningID");
 var messageLetterAlready = document.getElementById("letteralreadyID");
 var pressAnyKeyDom = document.getElementById("pressanykeyID");
+var correctAnswerDom = document.getElementById("correctanswerID");
 //var musicalPic1 = document.getElementById("musicalimage1");
 
 //GLOBAL VARIABLES
@@ -67,16 +68,22 @@ function startGame() {
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
     incorrectGuessedLetterArray = [];
-    guessesCounter = 10;
+    guessesCounter = 3;
     guessesCounterDom.textContent = guessesCounter;
     messageLetterAlready.textContent = "";
-    pressAnyKeyDom.textContent = "Press any key to get started!";
+    pressAnyKeyDom.textContent = "Press any key to get started!"; 
 }
 
 function contentReset() {
+    gameOn = true;
     messageLetterAlready.textContent = "";
     lettersGuessedDom.textContent = "";
-    guessesCounter = 10;
+    guessesCounter = 3;
+    pressAnyKeyDom.textContent = "";
+    musicalPlaceholderArray = [];
+    correctGuessedLetterArray = [];
+    incorrectGuessedLetterArray = [];
+    guessesCounterDom.textContent = guessesCounter;  
 }
 
 
@@ -116,7 +123,9 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
                     underscores.textContent = musicalPlaceholderArray.join("");
 
+
                     if (musicalsList[0] === musicalPlaceholderArray.join("")) {
+                        
                         musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = musicalPic1;
                         
                         musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = musicalPic1a;}
@@ -127,8 +136,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                         musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = musicalPic2a;}
 
                     if (musicalsList[2] === musicalPlaceholderArray.join("")) {
-                        musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";
-                        
+                        musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
                         document.querySelector("#musicalPic").innerHTML = musicalPic3;}
 
                     if (musicalsList[2] === musicalPlaceholderArray.join("")) {
@@ -157,7 +165,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
     function wrongLetter () {
 
-        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) {          //if the guess ISN'T in the musical word AND the guess is a letter
+        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) { //if the guess ISN'T in the musical word AND the guess is a letter
             incorrectGuessedLetterArray.push(userTypes);
             lettersGuessedDom.textContent = incorrectGuessedLetterArray;
             guessesCounter--;
@@ -165,8 +173,75 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
         if (alphabetLetters.indexOf(userTypes) < 0) {
                 //if the guess ISN'T a letter
-            notLetters.push(userTypes);}            
+            notLetters.push(userTypes);}
+
+            if (guessesCounter === 0 && musicalsList[0] === musicalPickedWord) {
+                musicalsList.indexOf("dont cry for me argentina")
+                musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = musicalPic1;
+                musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = musicalPic1a;
+                contentReset();
+                i = 0;
+                if (confirm("The correct answer was 'Don't Cry For Me Argentina'! Wanna keep playing?"))
+            {
+                    pickRandomWord();
+                    guessingTheLetter(); }
+                else {
+                    alert("Goodnight and thank you for playing!");
+                }
+
+            } 
+            else if (guessesCounter === 0 && musicalsList[1] === musicalPickedWord) {
+                musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = musicalPic2;
+                musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = musicalPic2a;
+                contentReset();
+                i = 0;
+                    if (confirm("The correct answer was 'Tomorrow'! Wanna keep playing?")) {
+                        pickRandomWord();
+                        guessingTheLetter(); }
+                    else {
+                        alert("Goodnight and thank you for playing!");
+                    }
+                
+            } 
+            else if (guessesCounter === 0 && musicalsList[2] === musicalPickedWord) {
+                musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
+                document.querySelector("#musicalPic").innerHTML = musicalPic3;
+                musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";
+                contentReset();
+                i = 0;
+                    if (confirm("The correct answer was 'I Dreamed A Dream'! Wanna keep playing?")) {
+                        pickRandomWord();
+                        guessingTheLetter(); }
+                    else {
+                        alert("Goodnight and thank you for playing!");
+                    }
+            }
+                else if (guessesCounter === 0 && musicalsList[3] === musicalPickedWord) {
+                musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = musicalPic4;
+                musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = musicalPic4a;
+                contentReset();
+                i = 0;
+                if (confirm("The correct answer was 'Memory'! Wanna keep playing?")) {
+                    pickRandomWord();
+                    guessingTheLetter(); }
+                else {
+                    alert("Goodnight and thank you for playing!");
+                }
+            } 
+            else if (guessesCounter === 0 && musicalsList[4] === musicalPickedWord) {
+                musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = musicalPic5;
+                musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = musicalPic5a;
+                contentReset();
+                i = 0;
+                if (confirm("The correct answer was 'Phantom Of The Opera'! Wanna keep playing?")) {
+                    pickRandomWord();
+                    guessingTheLetter(); }
+                else {
+                    alert("Goodnight and thank you for playing!");
+                }
+            }
     }
+
 
 //RESET ETC
 
@@ -184,14 +259,16 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             for (var i = 0; i < musicalPickedWord.length; i++) {
                 if (musicalPickedWord[i] === userTypes) {
                     musicalPlaceholderArray[i] = musicalPickedWord[i]; }
-                    //lettersGuessedDom.textContent = "";
+                    lettersGuessedDom.textContent = "";
+                    pressAnyKeyDom.textContent = "";
                     guessingTheLetter();
                     contentReset();
             }
-            startGame();
+            //startGame();
             pickRandomWord();
-        if (wins === 5) {
-            alert("YOU WIN");
+            
+        if (wins === 8) {
+            alert("Start spreading the news! You just won!!!");
         }
         }
     }
