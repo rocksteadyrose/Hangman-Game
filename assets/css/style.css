@@ -1,12 +1,12 @@
 @font-face {
     font-family: "assistantregular";
-    src: url("fonts/Assistant-Regular.ttf");
+    src: url("fonts/assistantregular.ttf");
     font-weight: normal;
 }
 
 @font-face {
     font-family: "assistantregular";
-    src: url("fonts/Assistant-Bold.ttf");
+    src: url("fonts/assistantbold.ttf");
     font-weight: bold;
 }
 
