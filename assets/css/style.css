@@ -1,9 +1,4 @@
 @font-face {
-	font-family: "showtime";
-    src: url("fonts/Showtime.ttf");
-}
-
-@font-face {
     font-family: "assistantregular";
     src: url("fonts/Assistant-Regular.ttf");
     font-weight: normal;
@@ -13,6 +8,11 @@
     font-family: "assistantregular";
     src: url("fonts/Assistant-Bold.ttf");
     font-weight: bold;
+}
+
+@font-face {
+	font-family: "showtime";
+    src: url("fonts/Showtime.ttf");
 }
 
 body {
