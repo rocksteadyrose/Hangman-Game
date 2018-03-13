@@ -37,13 +37,13 @@ var memoryAudio = new Audio("assets/audio/memory.mp3");
 var phantomAudio = new Audio("assets/audio/thephantomoftheopera.mp3");
 var wins = 0;
 var guessesCounter = " ";
-var gameOn = false; //Has the game started - set to false until "function StartGame"
-var musicalPickedWord = ""; //Created from the random musicals variable array
-var musicalPlaceholder = " "; // Spaces to put in below placeholder array
-var musicalPlaceholderArray = []; //Automatically creates spaces
-var correctGuessedLetterArray = []; //Correct guessed letter bank
-var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
-alphabetLetters = alphabetString.split(""); //Splits the letters and puts them into the empty array, alphabetLetters
+var gameOn = false;
+var musicalPickedWord = "";
+var musicalPlaceholder = " ";
+var musicalPlaceholderArray = [];
+var correctGuessedLetterArray = [];
+var incorrectGuessedLetterArray = [];
+alphabetLetters = alphabetString.split("");
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
 function startGame() {
@@ -161,7 +161,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
     function wrongLetter () {
 
         if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) { 
-            incorrectGuessedLetterArray.push(userTypes);
+            incorrectGuessedLetterArray.push(" " + userTypes);            
             lettersGuessedDom.textContent = incorrectGuessedLetterArray;
             guessesCounter--;
             guessesCounterDom.textContent = guessesCounter;}
