@@ -7,7 +7,7 @@
 //Add onkeyup event to trigger letter guesses
 
 //------------------------------------------------------------------------------------------------------------------
-//GLOBAL VARIABLES FOR HTML
+//GLOBAL VARIABLES FOR DOM
 var newGame = document.getElementById("newgamebuttonID");
 var underscores = document.getElementById("replacingunderscoresID");
 var lettersGuessedDom = document.getElementById("lettersguessedID");
@@ -18,12 +18,14 @@ guessesCounterDom.textContent = guessesCounter;
 var messageGameRunning = document.getElementById("gamerunningID");
 var messageLetterAlready = document.getElementById("letteralreadyID");
 var pressAnyKeyDom = document.getElementById("pressanykeyID");
+var turnSoundOnDom = document.getElementById("turnsoundonID");
 var correctAnswerDom = document.getElementById("correctanswerID");
 var soLong = document.getElementById("endvideoID");
 var superCali = document.getElementById("startvideoID");
 
+//------------------------------------------------------------------------------------------------------------------
 //GLOBAL VARIABLES
-var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
+var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"];
 var alphabetString = "abcdefghijklmnopqrstuvwxyz";
 var alphabetLetters = [];
 var notLetters = [];
@@ -33,7 +35,7 @@ var tomorrowAudio = new Audio("assets/audio/tomorrow.mp3");
 var iDreamedAudio = new Audio("assets/audio/idreamedadream.mp3"); 
 var memoryAudio = new Audio("assets/audio/memory.mp3"); 
 var phantomAudio = new Audio("assets/audio/thephantomoftheopera.mp3");
-var wins = 0; //Win counter
+var wins = 0;
 var guessesCounter = " ";
 var gameOn = false; //Has the game started - set to false until "function StartGame"
 var musicalPickedWord = ""; //Created from the random musicals variable array
@@ -42,7 +44,6 @@ var musicalPlaceholderArray = []; //Automatically creates spaces
 var correctGuessedLetterArray = []; //Correct guessed letter bank
 var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly guessed letters
 alphabetLetters = alphabetString.split(""); //Splits the letters and puts them into the empty array, alphabetLetters
-
 //------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
 function startGame() {
@@ -53,43 +54,28 @@ function startGame() {
     guessesCounter = 10;
     guessesCounterDom.textContent = guessesCounter;
     messageLetterAlready.textContent = "";
-    pressAnyKeyDom.textContent = "Press any key to get started!"; 
-}
-
-//------------------------------------------------------------------------------------------------------------------
-
-function contentReset() {
-    gameOn = true;
-    messageLetterAlready.textContent = "";
-    lettersGuessedDom.textContent = "";
-    guessesCounter = 10;
-    pressAnyKeyDom.textContent = "";
-    musicalPlaceholderArray = [];
-    correctGuessedLetterArray = [];
-    incorrectGuessedLetterArray = [];
-    guessesCounterDom.textContent = guessesCounter;  
+    pressAnyKeyDom.textContent = "Press any key to get on with the show!"; 
+    turnSoundOnDom.textContent = "AND turn your sound up to sing along (you know you want to...)";
 }
 //------------------------------------------------------------------------------------------------------------------
-
+// PICK RANDOM WORD:
 function pickRandomWord() {
 musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)];
 
-        //LOOPS THROUGH NEW PICKED WORD. Create placeholders out of new picked word:
-    for (var i = 0; i < musicalPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
-    //Check to see what kind of a word you're picking
+    for (var i = 0; i < musicalPickedWord.length; i++) { 
         if (musicalPickedWord[i] === " ") { 
-            musicalPlaceholderArray.push(" "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
+            musicalPlaceholderArray.push(" ");
         } else {
-            musicalPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
+            musicalPlaceholderArray.push("_")
         }
     }
     underscores.textContent = musicalPlaceholderArray.join("");
 }
 //------------------------------------------------------------------------------------------------------------------
-// GUESSING SECTION: This is the letter guess function. It will take in a letter you press and see if it's in the selected word or not.
+// GUESSING SECTION:
     function guessingTheLetter() {
-
                 pressAnyKeyDom.textContent = "";
+                turnSoundOnDom.textContent = "";
 
                 if (gameOn === true && correctGuessedLetterArray.indexOf(userTypes) === -1) {
                             
@@ -104,7 +90,6 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     messageLetterAlready.textContent = "";
 
                     underscores.textContent = musicalPlaceholderArray.join("");
-
 
                     if (musicalsList[0] === musicalPlaceholderArray.join("")) {
                         dontCryAudio.play();
@@ -172,18 +157,16 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
                 else { messageLetterAlready.textContent = "You picked this already! Pick another!";}
     }
-
 //------------------------------------------------------------------------------------------------------------------
     function wrongLetter () {
 
-        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) { //if the guess ISN'T in the musical word AND the guess is a letter
+        if (musicalPickedWord.indexOf(userTypes) < 0 && alphabetLetters.indexOf(userTypes) >= 0) { 
             incorrectGuessedLetterArray.push(userTypes);
             lettersGuessedDom.textContent = incorrectGuessedLetterArray;
             guessesCounter--;
             guessesCounterDom.textContent = guessesCounter;}
 
         if (alphabetLetters.indexOf(userTypes) < 0) {
-                //if the guess ISN'T a letter
             notLetters.push(userTypes);}
 
             if (guessesCounter === 0 && musicalsList[0] === musicalPickedWord) {
@@ -214,7 +197,6 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                         alert("Goodnight and thank you for playing!");
                         endGame();
                     }
-                
             } 
             else if (guessesCounter === 0 && musicalsList[2] === musicalPickedWord) {
                 musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
@@ -258,9 +240,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                 }
             }
     }
-
 //------------------------------------------------------------------------------------------------------------------
-
     function pointsSystem() {
         //if (musicalPickedWord != musicalPlaceholderArray.join("")) {
             //guessesCounter--;
@@ -282,10 +262,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                     contentReset();
             }
             pickRandomWord();
-            
-            
-            
-            
+                 
         if (wins === 10) {
             alert("Start spreading the news! You just won!!!! #UNSTOPPABLE");
             won();
@@ -293,9 +270,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
         }
     }
 
-
 //------------------------------------------------------------------------------------------------------------------
-
 
 document.onkeyup = function(event) {
         // This function is run whenever the user presses a key for their user guess.
@@ -305,9 +280,8 @@ document.onkeyup = function(event) {
     }
 //-----------------------------------------------------------------------------------------------------------
 
-startGame();
-pickRandomWord();
-
+//-----------------------------------------------------------------------------------------------------------
+//WIN GAME
 function won () {
     audioPauses ()
     superCali ="<iframe src=\"https://www.youtube.com/embed/AZnt-0fEiT0?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#startvideoID").innerHTML = superCali;
@@ -318,10 +292,8 @@ function won () {
        "none"
 
     }
-
 //------------------------------------------------------------------------------------------------------------------
-
-
+//END GAME
 function endGame () {
     audioPauses ()
     soLong ="<iframe src=\"https://www.youtube.com/embed/Qy9_lfjQopU?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#endvideoID").innerHTML = soLong;
@@ -340,3 +312,19 @@ function audioPauses () {
     tomorrowAudio.pause();
 }
 //------------------------------------------------------------------------------------------------------------------
+// RESET EVERYTHING:
+function contentReset() {
+    gameOn = true;
+    messageLetterAlready.textContent = "";
+    lettersGuessedDom.textContent = "";
+    guessesCounter = 10;
+    pressAnyKeyDom.textContent = "";
+    turnSoundOnDom.textContent = "";
+    musicalPlaceholderArray = [];
+    correctGuessedLetterArray = [];
+    incorrectGuessedLetterArray = [];
+    guessesCounterDom.textContent = guessesCounter;  
+}
+//------------------------------------------------------------------------------------------------------------------
+startGame();
+pickRandomWord();

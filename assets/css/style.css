@@ -48,7 +48,16 @@ header h1 {
     font-size: 40px;
     position: absolute;
     bottom: 90px;
-    left: 220px;
+    left: 140px;
+    color: white;
+    text-shadow: 2px 2px #000000;
+}
+
+#turnsoundonID {
+    font-size: 20px;
+    position: absolute;
+    bottom: 60px;
+    left: 180px;
     color: white;
     text-shadow: 2px 2px #000000;
 }
@@ -76,6 +85,7 @@ header h1 {
 #currentwordID, #replacingunderscoresID, #currentword {
     line-height: 40px;
     font-weight: bold;
+    padding-top: 30px;
 }
 
 #replacingunderscoresID, #currentword {
