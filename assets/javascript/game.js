@@ -24,7 +24,11 @@ var pressAnyKeyDom = document.getElementById("pressanykeyID");
 var correctAnswerDom = document.getElementById("correctanswerID");
 var soLong = document.getElementById("endvideoID");
 var superCali = document.getElementById("startvideoID");
-var audioDom = document.getElementById("audioID");
+//var audioDomDontCryForMe = document.getElementById("audioIDDontCryForMe");
+//var audioDomTomorrow = document.getElementById("audioIDTomorrow");
+//var audioDomIDreamedADream = document.getElementById("audioIDIDreamedADream");
+//var audioDomMemory = document.getElementById("audioIDMemory");
+//var audioDomPhantom = document.getElementById("audioIDPhantom");
 
 //GLOBAL VARIABLES
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
@@ -32,7 +36,11 @@ var alphabetString = "abcdefghijklmnopqrstuvwxyz";
 var alphabetLetters = [];
 var notLetters = [];
 var userTypes;
-//var musicalPlaylist = new Audio("assets/audio/dontcryformeargentina.mp3", "assets/audio/tomorrow.mp3", "assets/audio/idreamedadream.mp3", "assets/audio/memory.mp3", "assets/audio/thephantomoftheopera.mp3");
+var dontCryAudio = new Audio("assets/audio/dontcryformeargentina.mp3");
+var tomorrowAudio = new Audio("assets/audio/tomorrow.mp3"); 
+var iDreamedAudio = new Audio("assets/audio/idreamedadream.mp3"); 
+var memoryAudio = new Audio("assets/audio/memory.mp3"); 
+var phantomAudio = new Audio("assets/audio/thephantomoftheopera.mp3");
 var wins = 0; //Win counter
 var guessesCounter = " ";
 var gameOn = false; //Has the game started - set to false until "function StartGame"
@@ -122,24 +130,33 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
 
                     if (musicalsList[0] === musicalPlaceholderArray.join("")) {
-                        //var audio = new Audio("assets/audio/dontcryformeargentina.mp3");
-                        //audio.play();
+                        dontCryAudio.play();
+                        tomorrowAudio.pause();
+                        iDreamedAudio.pause();
+                        memoryAudio.pause();
+                        tomorrowAudio.pause();
                         
                         musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = musicalPic1;
                         
                         musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = musicalPic1a;}
 
                     if (musicalsList[1] === musicalPlaceholderArray.join("")) {
-                        //var audio = new Audio("assets/audio/tomorrow.mp3");
-                        //audio.play();
+                        tomorrowAudio.play();
+                        dontCryAudio.pause();
+                        iDreamedAudio.pause();
+                        memoryAudio.pause();
+                        phantomAudio.pause();
 
                         musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = musicalPic2;
 
                         musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = musicalPic2a;}
 
                     if (musicalsList[2] === musicalPlaceholderArray.join("")) {
-                        //var audio = new Audio("assets/audio/idreamedadream.mp3");
-                        //audio.play();
+                        iDreamedAudio.play();
+                        phantomAudio.pause();
+                        dontCryAudio.pause();
+                        memoryAudio.pause();
+                        tomorrowAudio.pause();
 
                         musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
                         document.querySelector("#musicalPic").innerHTML = musicalPic3;
@@ -148,16 +165,22 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                         document.querySelector("#musicalPicb").innerHTML = musicalPic3a;}
 
                     if (musicalsList[3] === musicalPlaceholderArray.join("")) {
-                        //var audio = new Audio("assets/audio/memory.mp3");
-                        //audio.play();
+                        memoryAudio.play();
+                        phantomAudio.pause();
+                        iDreamedAudio.pause();
+                        dontCryAudio.pause();
+                        tomorrowAudio.pause();
 
                         musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = musicalPic4;
                         
                         musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = musicalPic4a;}
 
                     if (musicalsList[4] === musicalPlaceholderArray.join("")) {
-                        //var audio = new Audio("assets/audio/thephantomoftheopera.mp3");
-                        //audio.play();
+                        phantomAudio.play();
+                        memoryAudio.pause();
+                        iDreamedAudio.pause();
+                        dontCryAudio.pause();
+                        tomorrowAudio.pause();
 
                         musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = musicalPic5;
                         
@@ -284,7 +307,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             }
             pickRandomWord();
             
-        if (wins === 3) {
+        if (wins === 10) {
             alert("Start spreading the news! You just won!!!");
             won();
         }
@@ -307,6 +330,11 @@ startGame();
 pickRandomWord();
 
 function won () {
+    memoryAudio.pause();
+    iDreamedAudio.pause();
+    dontCryAudio.pause();
+    tomorrowAudio.pause();
+    phantomAudio.pause();
     superCali ="<iframe src=\"https://www.youtube.com/embed/AZnt-0fEiT0?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#startvideoID").innerHTML = superCali;
     
     for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
@@ -320,6 +348,12 @@ function won () {
 
 
 function endGame () {
+    memoryAudio.pause();
+    iDreamedAudio.pause();
+    dontCryAudio.pause();
+    tomorrowAudio.pause();
+    phantomAudio.pause();
+
     soLong ="<iframe src=\"https://www.youtube.com/embed/Qy9_lfjQopU?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#endvideoID").innerHTML = soLong;
 
     for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
