@@ -44,19 +44,6 @@ var incorrectGuessedLetterArray = []; //Bank where we store the incorrectly gues
 alphabetLetters = alphabetString.split(""); //Splits the letters and puts them into the empty array, alphabetLetters
 
 //------------------------------------------------------------------------------------------------------------------
-
-var musicalPic1;
-var musicalPic2;
-var musicalPic3;
-var musicalPic4;
-var musicalPic5;
-var musicalPic1a;
-var musicalPic2a;
-var musicalPic3a;
-var musicalPic4a;
-var musicalPic5a;
-
-//------------------------------------------------------------------------------------------------------------------
 // NEW GAME SECTION: To reset all stats, pick new word and push placeholders into the words
 function startGame() {
     gameOn = true;
@@ -90,7 +77,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
         //LOOPS THROUGH NEW PICKED WORD. Create placeholders out of new picked word:
     for (var i = 0; i < musicalPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
     //Check to see what kind of a word you're picking
-        if (musicalPickedWord[i] === " ") { console.log(musicalPickedWord[i])
+        if (musicalPickedWord[i] === " ") { 
             musicalPlaceholderArray.push(" "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
         } else {
             musicalPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
