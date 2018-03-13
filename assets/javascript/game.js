@@ -90,7 +90,7 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
         //LOOPS THROUGH NEW PICKED WORD. Create placeholders out of new picked word:
     for (var i = 0; i < musicalPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
     //Check to see what kind of a word you're picking
-        if (musicalPickedWord[i] === " ") {
+        if (musicalPickedWord[i] === " ") { console.log(musicalPickedWord[i])
             musicalPlaceholderArray.push(" "); //Automatically creates spaces for you. Hard for user to guess a space. So if it is an empty space, push an empty space.
         } else {
             musicalPlaceholderArray.push("_") //If it's not an empty space, push an underscore.
