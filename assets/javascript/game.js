@@ -7,9 +7,6 @@
 //Add onkeyup event to trigger letter guesses
 
 //------------------------------------------------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------------------------------------------
 //GLOBAL VARIABLES FOR HTML
 var newGame = document.getElementById("newgamebuttonID");
 var underscores = document.getElementById("replacingunderscoresID");
@@ -24,11 +21,6 @@ var pressAnyKeyDom = document.getElementById("pressanykeyID");
 var correctAnswerDom = document.getElementById("correctanswerID");
 var soLong = document.getElementById("endvideoID");
 var superCali = document.getElementById("startvideoID");
-//var audioDomDontCryForMe = document.getElementById("audioIDDontCryForMe");
-//var audioDomTomorrow = document.getElementById("audioIDTomorrow");
-//var audioDomIDreamedADream = document.getElementById("audioIDIDreamedADream");
-//var audioDomMemory = document.getElementById("audioIDMemory");
-//var audioDomPhantom = document.getElementById("audioIDPhantom");
 
 //GLOBAL VARIABLES
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
@@ -94,8 +86,6 @@ function contentReset() {
 
 function pickRandomWord() {
 musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)];
-    // PICK A NEW WORD: PICK A RANDOM WORD FROM THE MUSICALS ARRAY. Generates a random index out of that word bank and gets a new word out.
-    //This rounds a number DOWNWARDS to the nearest integer, and returns the result from within that array (what's in the bracket is only a number).
 
         //LOOPS THROUGH NEW PICKED WORD. Create placeholders out of new picked word:
     for (var i = 0; i < musicalPickedWord.length; i++) { //responsible for just incrementing the variable i, doesn't care about the random word.
