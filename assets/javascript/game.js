@@ -1,4 +1,3 @@
-
 //PSEUDO CODE
 // Define global variables
 // Have a start game section that resets everything, like what you see on the screen and the win/lose counter, etc
@@ -25,6 +24,7 @@ var pressAnyKeyDom = document.getElementById("pressanykeyID");
 var correctAnswerDom = document.getElementById("correctanswerID");
 var soLong = document.getElementById("endvideoID");
 var superCali = document.getElementById("startvideoID");
+var audioDom = document.getElementById("audioID");
 
 //GLOBAL VARIABLES
 var musicalsList = ["dont cry for me argentina", "tomorrow", "i dreamed a dream", "memory", "the phantom of the opera"]; //Variables to guess
@@ -32,6 +32,7 @@ var alphabetString = "abcdefghijklmnopqrstuvwxyz";
 var alphabetLetters = [];
 var notLetters = [];
 var userTypes;
+//var musicalPlaylist = new Audio("assets/audio/dontcryformeargentina.mp3", "assets/audio/tomorrow.mp3", "assets/audio/idreamedadream.mp3", "assets/audio/memory.mp3", "assets/audio/thephantomoftheopera.mp3");
 var wins = 0; //Win counter
 var guessesCounter = " ";
 var gameOn = false; //Has the game started - set to false until "function StartGame"
@@ -81,7 +82,6 @@ function contentReset() {
     incorrectGuessedLetterArray = [];
     guessesCounterDom.textContent = guessesCounter;  
 }
-
 //------------------------------------------------------------------------------------------------------------------
 
 function pickRandomWord() {
@@ -122,33 +122,47 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
 
 
                     if (musicalsList[0] === musicalPlaceholderArray.join("")) {
+                        //var audio = new Audio("assets/audio/dontcryformeargentina.mp3");
+                        //audio.play();
                         
                         musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = musicalPic1;
                         
                         musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = musicalPic1a;}
 
                     if (musicalsList[1] === musicalPlaceholderArray.join("")) {
+                        //var audio = new Audio("assets/audio/tomorrow.mp3");
+                        //audio.play();
+
                         musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = musicalPic2;
 
                         musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = musicalPic2a;}
 
                     if (musicalsList[2] === musicalPlaceholderArray.join("")) {
-                        musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
-                        document.querySelector("#musicalPic").innerHTML = musicalPic3;}
+                        //var audio = new Audio("assets/audio/idreamedadream.mp3");
+                        //audio.play();
 
-                    if (musicalsList[2] === musicalPlaceholderArray.join("")) {
+                        musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";   
+                        document.querySelector("#musicalPic").innerHTML = musicalPic3;
+
                         musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";
                         document.querySelector("#musicalPicb").innerHTML = musicalPic3a;}
 
                     if (musicalsList[3] === musicalPlaceholderArray.join("")) {
+                        //var audio = new Audio("assets/audio/memory.mp3");
+                        //audio.play();
+
                         musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = musicalPic4;
                         
                         musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = musicalPic4a;}
 
                     if (musicalsList[4] === musicalPlaceholderArray.join("")) {
+                        //var audio = new Audio("assets/audio/thephantomoftheopera.mp3");
+                        //audio.play();
+
                         musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = musicalPic5;
                         
                         musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = musicalPic5a;}
+
 
                     wrongLetter();
                     pointsSystem();
@@ -261,9 +275,10 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             underscores.textContent = musicalPlaceholderArray.join("");
             for (var i = 0; i < musicalPickedWord.length; i++) {
                 if (musicalPickedWord[i] === userTypes) {
-                    musicalPlaceholderArray[i] = musicalPickedWord[i]; }
+                    musicalPlaceholderArray[i] = musicalPickedWord[i];
+                    }
                     lettersGuessedDom.textContent = "";
-                    pressAnyKeyDom.textContent = "";
+                    pressAnyKeyDom.textContent = ""; 
                     guessingTheLetter();
                     contentReset();
             }
@@ -292,33 +307,24 @@ startGame();
 pickRandomWord();
 
 function won () {
-    superCali ="<iframe src=\"https://www.youtube.com/embed/rihNRTTcztQ?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#startvideoID").innerHTML = superCali;
-    musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = "";
-    musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = "";
-    musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = "";
-    musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = "";
-}
+    superCali ="<iframe src=\"https://www.youtube.com/embed/AZnt-0fEiT0?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#startvideoID").innerHTML = superCali;
+    
+    for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
+        document.getElementsByTagName('img')[i].style.display = 'none';
+       }
+       "none"
+
+    }
 
 //------------------------------------------------------------------------------------------------------------------
 
 
 function endGame () {
     soLong ="<iframe src=\"https://www.youtube.com/embed/Qy9_lfjQopU?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#endvideoID").innerHTML = soLong;
-    musicalPic1="<img src=\"assets/images/evita.jpg\" class=\"evita1\" alt=\"Evita\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic1a="<img src=\"assets/images/evita2.jpg\" class=\"evita2\" alt=\"Evita\">";document.querySelector("#musicalPicb").innerHTML = "";
-    musicalPic2="<img src=\"assets/images/annie.jpg\" class=\"annie1\" alt=\"Annie\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic2a="<img src=\"assets/images/annie2.jpg\" class=\"annie2\" alt=\"Annie\">";document.querySelector("#musicalPicb").innerHTML = "";
-    musicalPic3="<img src=\"assets/images/lesmis.jpg\" class=\"lesmis1\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic3a="<img src=\"assets/images/lesmis2.jpg\" class=\"lesmis2\" alt=\"LesMis\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic4="<img src=\"assets/images/cats.jpg\" class=\"cats1\" alt=\"Cats\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic4a="<img src=\"assets/images/cats2.jpg\" class=\"cats2\" alt=\"Cats\">";document.querySelector("#musicalPicb").innerHTML = "";
-    musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = "";
-    musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = "";
+
+    for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
+        document.getElementsByTagName('img')[i].style.display = 'none';
+       }
+       "none"
 }
 //------------------------------------------------------------------------------------------------------------------
