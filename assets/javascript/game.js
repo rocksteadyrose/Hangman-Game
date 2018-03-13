@@ -71,7 +71,7 @@ function startGame() {
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
     incorrectGuessedLetterArray = [];
-    guessesCounter = 3;
+    guessesCounter = 10;
     guessesCounterDom.textContent = guessesCounter;
     messageLetterAlready.textContent = "";
     pressAnyKeyDom.textContent = "Press any key to get started!"; 
@@ -83,7 +83,7 @@ function contentReset() {
     gameOn = true;
     messageLetterAlready.textContent = "";
     lettersGuessedDom.textContent = "";
-    guessesCounter = 3;
+    guessesCounter = 10;
     pressAnyKeyDom.textContent = "";
     musicalPlaceholderArray = [];
     correctGuessedLetterArray = [];
@@ -185,7 +185,6 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
                         musicalPic5="<img src=\"assets/images/phantom.jpg\" class=\"phantom1\" alt=\"Phantom\">";document.querySelector("#musicalPic").innerHTML = musicalPic5;
                         
                         musicalPic5a="<img src=\"assets/images/phantom2.jpg\" class=\"phantom2\" alt=\"Phantom\">";document.querySelector("#musicalPicb").innerHTML = musicalPic5a;}
-
 
                     wrongLetter();
                     pointsSystem();
@@ -307,8 +306,11 @@ musicalPickedWord = musicalsList[Math.floor(Math.random() * musicalsList.length)
             }
             pickRandomWord();
             
+            
+            
+            
         if (wins === 10) {
-            alert("Start spreading the news! You just won!!!");
+            alert("Start spreading the news! You just won!!!! #UNSTOPPABLE");
             won();
         }
         }
@@ -330,11 +332,7 @@ startGame();
 pickRandomWord();
 
 function won () {
-    memoryAudio.pause();
-    iDreamedAudio.pause();
-    dontCryAudio.pause();
-    tomorrowAudio.pause();
-    phantomAudio.pause();
+    audioPauses ()
     superCali ="<iframe src=\"https://www.youtube.com/embed/AZnt-0fEiT0?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#startvideoID").innerHTML = superCali;
     
     for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
@@ -348,17 +346,20 @@ function won () {
 
 
 function endGame () {
-    memoryAudio.pause();
-    iDreamedAudio.pause();
-    dontCryAudio.pause();
-    tomorrowAudio.pause();
-    phantomAudio.pause();
-
+    audioPauses ()
     soLong ="<iframe src=\"https://www.youtube.com/embed/Qy9_lfjQopU?rel=0;&autoplay=1\" class=\"video\"></iframe>";document.querySelector("#endvideoID").innerHTML = soLong;
 
     for (var i = 0; i < document.getElementsByTagName('img').length; i++) {
         document.getElementsByTagName('img')[i].style.display = 'none';
        }
        "none"
+}
+
+function audioPauses () {
+    memoryAudio.pause();
+    phantomAudio.pause();
+    iDreamedAudio.pause();
+    dontCryAudio.pause();
+    tomorrowAudio.pause();
 }
 //------------------------------------------------------------------------------------------------------------------
