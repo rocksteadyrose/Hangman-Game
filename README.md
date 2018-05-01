@@ -1,4 +1,6 @@
-# Hangman-Game: The curtain's up and the lights are low - time for your fav show: Broadway Hangman!
+# Hangman-Game: 
+
+The curtain's up and the lights are low - time for your fav show: Broadway Hangman!
 
 DEPLOYED PROJECT LINK: https://rocksteadyrose.github.io/Hangman-Game/
 
